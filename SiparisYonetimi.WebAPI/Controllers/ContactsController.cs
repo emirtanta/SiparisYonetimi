@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SiparisYonetimi.Entities;
 using SiparisYonetimi.Service.Abstract;
+using SiparisYonetimi.Service.Concrete;
 
 namespace SiparisYonetimi.WebAPI.Controllers
 {
@@ -58,16 +59,17 @@ namespace SiparisYonetimi.WebAPI.Controllers
         {
             var record = await _contactService.FindAsync(id);
 
-            if (record==null)
+            if (record == null)
             {
                 return BadRequest();
             }
+            _contactService.Delete(record);
 
             var result = await _contactService.SaveChangesAsync();
 
-            if (result>0) 
+            if (result > 0)
             {
-                return Ok($"Kayıt Başarılı Bir Şekilde Silindi");
+                return Ok("Kayıt Başarılı Bir Şekilde Silindi");
             }
 
             return StatusCode(StatusCodes.Status304NotModified);

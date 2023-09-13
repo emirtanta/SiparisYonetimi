@@ -1,0 +1,47 @@
+﻿@model Contact
+@{
+    ViewData["Title"] = "Hakkımızda Düzenle";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="text-center text-succes">@ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ContactEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <input type="hidden" asp-for="Id" />
+            
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label"></label>
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Message" class="control-label"></label>
+                @Html.TextAreaFor(m => m.Message,new {cols="50",rows="10"})
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Güncelle" class="btn btn-outline-info btn-sm" />
+                <a asp-area="Admin" asp-controller="Contacts" asp-action="ContactList" class="btn btn-outline-danger btn-sm">İptal</a>
+            </div>
+        </form>
+    </div>
+</div>

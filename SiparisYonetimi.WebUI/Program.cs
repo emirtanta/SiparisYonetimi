@@ -8,7 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//web api ile baðalntý kurup api kullanarak veratabaný iþlemleri yapabilmek için tanýmlandý
+builder.Services.AddSession(); //session aktif eder
+
+//web api ile baðlantý kurup api kullanarak veratabaný iþlemleri yapabilmek için tanýmlandý
 builder.Services.AddHttpClient();
 
 builder.Services.AddDbContext<DatabaseContext>();
@@ -18,7 +20,10 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie(x =>
     {
         x.LoginPath = "/Admin/Login";
+        x.LogoutPath = "/Admin/Logout";
+        x.AccessDeniedPath = "/AccessDenied";
         x.Cookie.Name = "Administrator"; //cookie adý
+        x.Cookie.MaxAge = TimeSpan.FromDays(1); //olusan cookie'nin sam suresi(1gün)
     });
 
 //Authorization: giris yapan kullanicinin yetkilerinin belirlenmesi
@@ -46,6 +51,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseSession(); //session ara katmanini aktif ettik
 
 app.UseAuthentication();
 app.UseAuthorization();

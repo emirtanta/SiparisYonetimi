@@ -38,5 +38,6 @@ namespace SiparisYonetimi.Entities
         
         [Display(Name = "Eklenme Tarihi"), ScaffoldColumn(false)]
         public DateTime? CreateDate { get; set; } = DateTime.Now;
+        public Guid? UserGuid { get; set; } //bu guid değerini session veya cookie de saklayarak kullanıcıyı tanımak için kullandık
     }
 }

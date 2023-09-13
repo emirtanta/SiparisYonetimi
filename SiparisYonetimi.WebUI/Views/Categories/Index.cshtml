@@ -1,0 +1,10 @@
+﻿@model Category
+@{
+    ViewData["Title"] = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">@Model.Name</h1>
+
+<partial name="_PartialProducts" model="Model.Products" />
+

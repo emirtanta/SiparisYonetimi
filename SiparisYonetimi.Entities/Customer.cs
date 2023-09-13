@@ -29,6 +29,7 @@ namespace SiparisYonetimi.Entities
 
         [Display(Name = "Müşteri Telefon")]
         [StringLength(15)]
+        [DataType(DataType.PhoneNumber)]
         public string? Phone { get; set; }
 
         [Display(Name = "Müşteri Adres")]
@@ -38,7 +39,7 @@ namespace SiparisYonetimi.Entities
         [Display(Name = "Durum")]
         public bool IsActive { get; set; }
 
-        [Display(Name = "Eklenme Tarihi"), ScaffoldColumn(false)]
-        public DateTime? CreateDate { get; set; } = DateTime.Now;
+        [Display(Name = "Eklenme Tarihi")/*, ScaffoldColumn(false)*/]
+        public DateTime? CreateDate { get; set; }
     }
 }

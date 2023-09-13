@@ -23,9 +23,9 @@ namespace SiparisYonetimi.Entities
         [Display(Name ="Aktif mi?")]
         public bool IsActive { get; set; }
 
-        [Display(Name ="Eklenme Tarihi"),ScaffoldColumn(false)]
+        [Display(Name ="Eklenme Tarihi")/*,ScaffoldColumn(false)*/]
         public DateTime? CreateDate { get; set; } = DateTime.Now;
 
-        public virtual List<Product> Products { get; set; }
+        public virtual List<Product>? Products { get; set; }
     }
 }

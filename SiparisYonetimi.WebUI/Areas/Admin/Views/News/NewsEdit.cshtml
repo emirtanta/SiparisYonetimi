@@ -1,0 +1,72 @@
+﻿@model News
+@{
+    ViewData["Title"] = "Haber Düzenle";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 action="text-center text-success">@ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="NewsEdit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Image" />
+            <input type="hidden" asp-for="CreateDate" />
+            
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            @* resim bölümü  *@
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" type="file" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+                @if (!string.IsNullOrEmpty(Model.Image))
+                {
+                    <img src="/Img/@Model.Image" alt="" height="50" />
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            @Html.CheckBox("resmiSil") Resmi Sil
+                        </label>
+                    </div>
+                }
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsHome" /> @Html.DisplayNameFor(model => model.IsHome)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderNo" class="control-label"></label>
+                <input asp-for="OrderNo" class="form-control" />
+                <span asp-validation-for="OrderNo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Güncelle" class="btn btn-outline-info btn-sm" />
+                <a asp-area="Admin" asp-controller="News" asp-action="NewsList">İptal</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    
+</div>

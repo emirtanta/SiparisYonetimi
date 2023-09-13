@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SiparisYonetimi.Entities;
 using SiparisYonetimi.Service.Abstract;
+using SiparisYonetimi.Service.Concrete;
 
 namespace SiparisYonetimi.WebAPI.Controllers
 {
@@ -31,16 +32,20 @@ namespace SiparisYonetimi.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Customer entity)
         {
+            entity.CreateDate = DateTime.Now;
+
             await _customerService.AddAsync(entity);
 
             await _customerService.SaveChangesAsync();
 
-            return Ok($"Kayıt Başarıyla Eklendi");
+            return Ok("Kategori Başarılı Bir Şekilde Eklendi");
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] Customer entity)
         {
+            entity.CreateDate = DateTime.Now;
+
             _customerService.Update(entity);
 
             var result=await _customerService.SaveChangesAsync();

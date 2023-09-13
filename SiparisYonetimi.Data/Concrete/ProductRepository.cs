@@ -4,6 +4,7 @@ using SiparisYonetimi.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,6 +35,16 @@ namespace SiparisYonetimi.Data.Concrete
         public Task<List<Product>> GetProductsByCategoryAndBrandAsync()
         {
             return _context.Products.Include(c=>c.Category).Include(b=>b.Brand).ToListAsync();
+        }
+
+        /// <summary>
+        /// tüm ürünleri marka ve kategorisiyle lambda expression filtre uygulayarak getirir
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        public async Task<List<Product>> GetProductsByIncludeAsync(Expression<Func<Product, bool>> expression)
+        {
+            return await _context.Products.Where(expression).Include(p => p.Brand).Include(p => p.Category).ToListAsync();
         }
     }
 }

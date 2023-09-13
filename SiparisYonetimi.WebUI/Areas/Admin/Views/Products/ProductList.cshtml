@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Ürün Listesi";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="text-center text-success">@ViewData["Title"]</h1>
+
+<p>
+    <a class="btn btn-outline-primary btn-sm" asp-action="ProductCreate">Yeni Ekle</a>
+</p>
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsHome)
+            </th>
+            <th>
+                Markası
+            </th>
+            <th>
+                Kategorisi
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="/Img/@item.Image" alt="" height="40" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsHome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    <a class="btn btn-outline-info btn-sm" asp-action="ProductEdit" asp-route-id="@item.Id">Düzenle</a> 
+                    <a class="btn btn-outline-danger btn-sm" asp-action="ProductDelete" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

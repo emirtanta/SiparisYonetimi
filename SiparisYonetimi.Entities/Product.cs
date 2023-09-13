@@ -36,15 +36,15 @@ namespace SiparisYonetimi.Entities
         [Display(Name = "Anasayfada mı?")]
         public bool IsHome { get; set; }
 
-        [Display(Name = "Eklenme Tarihi"), ScaffoldColumn(false)]
-        public DateTime? CreateDate { get; set; }=DateTime.Now;
+        [Display(Name = "Eklenme Tarihi")/*, ScaffoldColumn(false)*/]
+        public DateTime? CreateDate { get; set; }
 
         [Display(Name = "Kategorisi")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public  virtual Category? Category { get; set; }
 
         [Display(Name = "Markası")]
-        public int BrandId { get; set; }
+        public int? BrandId { get; set; }
         public virtual Brand? Brand { get; set; }
     }
 }

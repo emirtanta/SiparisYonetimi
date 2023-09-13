@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Ürünlerimiz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<partial name="_PartialProducts" model="Model" />

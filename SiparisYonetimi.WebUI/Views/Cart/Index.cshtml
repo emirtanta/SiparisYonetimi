@@ -1,0 +1,70 @@
+﻿@model Cart
+@{
+    ViewData["Title"] = "Sepetim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th></th>
+                    <th>Ürün</th>
+                    <th>Fiyat</th>
+                    <th>Miktar</th>
+                    <th>Toplam</th>
+                    <th></th>
+                </tr>
+                <tbody>
+                    @foreach (var item in Model.Products)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-controller="Products" asp-action="Detail" asp-route-id="@item.Product.Id">
+                                    <img src="/Img/@item.Product.Image" alt="" class="img-thumbnail" style="max-height:50px" />
+                                </a>
+                            </td>
+                            <td>@item.Product.Price.ToString("c")</td>
+                            <td>
+                                <input type="number" value="@item.Quantity" min="1" class="form-control"/>
+
+                            </td>
+                            <td>@((item.Quantity * item.Product.Price).ToString("c"))</td>
+                            <td>
+                                <form asp-controller="Cart" asp-action="RemoveFromProduct">
+
+                                    <input type="hidden" name="productId" value="@item.Product.Id"/>
+
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Sil X</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-4">
+            <h5>Sepet Bilgisi</h5>
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <th>Sepet Ara Toplam</th>
+                        <td>@Model.TotalPrice().ToString("c")</td>
+                    </tr>
+                    <tr>
+                        <th>Kargo</th>
+                        <td>Ücretsiz</td>
+                    </tr>
+                    <tr>
+                        <th>Sepet Toplamı</th>
+                        <td>@Model.TotalPrice().ToString("c")</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

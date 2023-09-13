@@ -31,6 +31,8 @@ namespace SiparisYonetimi.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Category entity)
         {
+            entity.CreateDate = DateTime.Now;
+
             await _categoryService.AddAsync(entity);
 
             await _categoryService.SaveChangesAsync();
@@ -41,6 +43,8 @@ namespace SiparisYonetimi.WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody]Category entity)
         {
+            entity.CreateDate = DateTime.Now;
+
             _categoryService.Update(entity);
 
             var result=await _categoryService.SaveChangesAsync();

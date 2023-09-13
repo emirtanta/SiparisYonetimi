@@ -18,6 +18,9 @@ namespace SiparisYonetimi.Data
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Slide> Slides { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<Setting> Settings { get; set; }
+        public virtual DbSet<News> News { get; set; }
 
         // bu metot veritabanı bağlantı ayarlarını yapabildiğimiz bir metot
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -42,7 +45,8 @@ namespace SiparisYonetimi.Data
                 Surname = "Admin",
                 Username = "admin",
                 Password = "123",
-                Phone = "123456789"
+                Phone = "123456789",
+                UserGuid=Guid.NewGuid()
             });
 
 

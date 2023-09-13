@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Customer>
+@{
+    ViewData["Title"] = "Müşteri Listesi";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="text-center text-success">@ViewData["Title"]</h1>
+
+<p>
+    <a class="btn btn-outline-primary" asp-action="CustomerCreate">Yeni Ekle</a>
+</p>
+<table class="table table-hover table-responsive">
+    <thead>
+        <tr>
+            <th>
+                Ad Soyad
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Name @item.Surname
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    <a class="btn btn-outline-info btn-sm" asp-action="CustomerEdit" asp-route-id="@item.Id">Düzenle</a> |
+                    <a class="btn btn-outline-danger btn-sm" asp-action="CustomerDelete" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

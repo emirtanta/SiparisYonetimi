@@ -30,9 +30,17 @@ namespace SiparisYonetimi.WebAPI.Controllers
             return await _service.FindAsync(id);
         }
 
+        [HttpGet("GetSearch/{aranacakKelime}")]
+        public async Task<IEnumerable<Product>> GetSearch(string aranacakKelime)
+        {
+            return await _productService.GetProductsByIncludeAsync(x=>x.IsActive && x.Name.Contains(aranacakKelime) || x.Description.Contains(aranacakKelime) || x.Brand.Name.Contains(aranacakKelime) || x.Category.Name.Contains(aranacakKelime));
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Product entity)
         {
+            entity.CreateDate = DateTime.Now;
+
             await _service.AddAsync(entity);
 
             await _service.SaveChangesAsync();
@@ -43,6 +51,8 @@ namespace SiparisYonetimi.WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] Product entity)
         {
+            entity.CreateDate = DateTime.Now;
+
             _service.Update(entity);
 
             var result = await _service.SaveChangesAsync();

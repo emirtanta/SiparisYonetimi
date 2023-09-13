@@ -22,15 +22,76 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+
+                        @await Component.InvokeAsync("Categories")
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ContactUs">İletişim</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Brands" asp-action="BrandList">Markalar</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Categories" asp-action="CategoryList">Kategoriler</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Contacts" asp-action="ContactList">Hakkımızda Listesi</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Customers" asp-action="CustomerList">Müşteriler Listesi</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Products" asp-action="ProductList">Ürünler Listesi</a>
                         </li>
                     </ul>
                 </div>
+
+                @* arama yapma bölümü *@
+                <div class="col-md-3">
+                    <form asp-controller="Products" asp-action="Search" method="get" class="input-group">
+                        <input type="text" name="aranacakKelime" class="form-control" placeholder="ara yapın" aria-label="ara.." aria-describedby="btnNavbarSearch" />
+                        
+                        <button class="btn btn-primary" id="btnNavbarSearch" type="submit"><i class="bi bi-search"></i>Ara</button>
+                    </form>
+                </div>
+
+
+                @*<a class="btn btn-outline-primary" asp-controller="Account" asp-action="Login"><i class="bi bi-person"></i>Üye Girişi</a>
+
+                <a class="btn btn-outline-primary" asp-controller="Account" asp-action="SigIn"><i class="bi bi-person"></i>Kayıt Ol</a>*@
+
+                <form class="d-flex">
+                    <button class="btn btn-outline-dark" type="submit">
+                        <i class="bi-cart-fill me-1"></i>
+                        Sepet
+                        <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
+                    </button>
+                </form>
+
+                <div class="text-end">
+                    @if (Context.Session.GetInt32("userId") == null)
+                    {
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary me-2">Giriş</a>
+                        <a asp-controller="Account" asp-action="SigIn" class="btn btn-primary">Kayıt</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Account" asp-action="Index" class="btn btn-primary">Hesabım</a>
+                        <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Oturumu Kapat</a>
+                    }
+                </div>
+
             </div>
         </nav>
     </header>
     <div class="container">
+        @Html.Raw(TempData["Message"])
+
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -38,7 +99,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - SiparisYonetimi.WebUI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; @DateTime.Now.ToShortDateString() - Sipariş Yönetimi Web Uygulaması - <a asp-area="" asp-controller="" asp-action="">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

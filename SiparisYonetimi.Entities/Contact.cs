@@ -27,6 +27,12 @@ namespace SiparisYonetimi.Entities
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "Telefon Zorunludur")]
+        [Display(Name = "Telefon")]
+        [DataType(DataType.PhoneNumber)]
+        public string Phone { get; set; }
+
+
         [Required(ErrorMessage = "Mesaj Zorunludur")]
         [Display(Name = "Mesaj")]
         [StringLength(1000)]

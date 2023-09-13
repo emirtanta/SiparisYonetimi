@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,5 +22,12 @@ namespace SiparisYonetimi.Data.Abstract
         /// </summary>
         /// <returns></returns>
         Task<List<Product>> GetProductsByCategoryAndBrandAsync();
+
+        /// <summary>
+        /// tüm ürünleri marka ve kategorisiyle lambda expression filtre uygulayarak getirecek metot
+        /// </summary>
+        /// <param name="expression"></param>
+        /// <returns></returns>
+        Task<List<Product>> GetProductsByIncludeAsync(Expression<Func<Product, bool>> expression);  
     }
 }
